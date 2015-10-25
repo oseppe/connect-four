@@ -27,6 +27,9 @@ $(function() {
       slotId = getSlotId(turnData['place']);
       $(slotId).removeClass('slot-empty');
       $(slotId).addClass(turnData["chipColor"]);
+      if (turnData['draw']) {
+        console.log("DRAW");
+      }
     }
   });
 });

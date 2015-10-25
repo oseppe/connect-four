@@ -5,16 +5,18 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 	this.checker = checker,
 	this.playerOne = playerOne,
 	this.playerTwo = playerTwo,
+	this.maxTurns = height * width,
+	this.noTurns = 0;
 	this.turn = 1,
 	
 	/**
      * Check if someone won
      *
-     * @param none
+     * @param object hash
      * @return boolean
      */
-	this.check = function() {
-		// return this.checker.check(this.board);
+	this.check = function(otherData) {
+		// return this.checker.check(this.board, otherData);
 		return false;
 	},
 
@@ -26,6 +28,7 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
      */
     this.restart = function() {
     	this.board = createTwoDArray(rows, columns);
+    	this.noTurns = 0;
 		this.turn = 1;
     }
 	/**
@@ -37,6 +40,7 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 	this.dropChip = function(col) {
 		
 		var chipColor = '';
+		var draw = false;
 		var place = {col: col, row: 0};
 		var row = this.updateBoard(col, this.turn);
 		var win = false;
@@ -45,6 +49,9 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 
 		// don't change game data if column already filled
 		if (row != -1) {
+
+			// increment number of turns
+			this.noTurns = this.noTurns + 1;
 
 			switch(this.turn) {
 				case 1:
@@ -57,10 +64,12 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 					break;
 			}
 
-			win = this.check();
+			win = this.check(place);
+			
+			draw = this.maxTurns == this.noTurns;
 		};
 			
-		return { place: place, chipColor: chipColor, win: win };
+		return { place: place, chipColor: chipColor, win: win, draw: draw };
 	}
 	// Start game
 	this.startGame = function() {

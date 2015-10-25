@@ -44,8 +44,16 @@ $ ->
 			# change slot color
 			$(slotId).removeClass('slot-empty')
 			$(slotId).addClass(turnData["chipColor"])
-			# TODO: check if win
+			
+			# NOTE: checking order is important.
+			# ALWAYS FIRST check if there is a win THEN check if there is a draw 
 
+			# TODO: FIRST check if win
+			# THEN check if draw.
+			if turnData['draw']
+				# TODO: proper alert
+				console.log "DRAW"
+			 	
 		return
 
 # 
