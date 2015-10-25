@@ -26,16 +26,38 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 	},
 
 	this.diagonalRisingCheck = function(board, lastChip) {
-		var bingo = false;
-		// TODO: check downward until see 0 or opposing color or index 0
-		// TODO: check upward until see 0 or opposing color or index length - 1
-		return bingo;
+		var count = 1;
+		var colIndex = lastChip['col'] - 1;
+		var rowIndex = lastChip['row'] + 1;
+		
+
+		// check diagonal left down
+		while(colIndex > -1 && rowIndex < this.maxRows && board[colIndex][rowIndex] == this.currentPlayer) {
+			count = count + 1;
+
+			// move diagonal left down
+			colIndex = colIndex - 1;
+			rowIndex = rowIndex + 1;
+		}
+
+		colIndex = lastChip['col'] + 1;
+		rowIndex = lastChip['row'] - 1;
+		// check downward right up
+		while(colIndex < this.maxColumns && rowIndex > -1 && board[colIndex][rowIndex] == this.currentPlayer) {
+			count = count + 1;
+
+			// move diagonal left down
+			colIndex = colIndex + 1;
+			rowIndex = rowIndex - 1;
+		}
+
+		return count > (noToWin - 1);
 	},
 
 	this.diagonalFallingCheck = function(board, lastChip) {
 		var bingo = false;
-		// TODO: check upward until see 0 or opposing color or index 0
 		// TODO: check downward until see 0 or opposing color or index length - 1
+		// TODO: check upward until see 0 or opposing color or index 0
 		return bingo;
 	},
 
