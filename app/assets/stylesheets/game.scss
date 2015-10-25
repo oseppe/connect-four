@@ -36,13 +36,13 @@ $player-two-color: #F64747;
 	background: $empty;
 }
 
-.slot-first-player {
+.slot-player-one {
 	@extend .slot;
 	border-color: $player-one-color;
 	background: $player-one-color;
 }
 
-.slot-second-player {
+.slot-player-two {
 	@extend .slot;
 	border-color: $player-two-color;
 	background: $player-two-color;
