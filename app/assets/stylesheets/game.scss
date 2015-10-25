@@ -2,8 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$game-board-color: #446CB3;
 $empty: #E4F1FE;
+$focused-color: #52B3D9;
+$game-board-color: #446CB3;
 $player-one-color: #F9BF3B;
 $player-two-color: #F64747;
 
@@ -12,9 +13,13 @@ $player-two-color: #F64747;
 	text-align: center;
 }
 
+.container-slot-focus {
+	@extend .container-slot;
+	background: $focused-color;
+}
+
 #game-board {
 	background: $game-board-color;
-	border-radius: 15px;
 }
 
 .slot {

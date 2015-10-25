@@ -4,11 +4,11 @@
 	<table id="game-board" class="table">
 		<tbody>
 			<% 6.times do |row| %>
-				<tr>
+				<tr id=<%= "row-#{row}" %>>
 					<% 7.times do |col| %>
-						<td class="container-slot">
+						<td id=<%= "col-#{col}" %> class="container-slot col-<%= col %>">
 							<%= "row: #{row} col: #{col}" %> 
-							<div class="slot-empty"></div>
+							<div id=<%= "slot-#{row}-#{col}" %> class="slot-empty"></div>
 						</td>
 					<% end %>
 				</tr>
