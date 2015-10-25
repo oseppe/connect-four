@@ -42,7 +42,7 @@ var Gameboard = function (playerOne, playerTwo, height, width) {
 		var chipColor = '';
 		var currentPlayer = 0;
 		var draw = false;
-		var place = { col: col, row: 0 };
+		var place = { col: parseInt(col), row: 0 };
 		var row = this.updateBoard(col, this.turn);
 		var win = false;
 

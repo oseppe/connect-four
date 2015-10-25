@@ -40,10 +40,29 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 	},
 
 	this.horizontalCheck = function(board, lastChip) {
-		var bingo = false;
-		// TODO: check left until see 0 or opposing color or index 0
-		// TODO: check right until see 0 or opposing color or index length - 1
-		return bingo;
+		var count = 1;
+		var row = lastChip['row'];
+		var index = lastChip['col'] - 1;
+
+		// check left until index 0 or no longer same color as current player
+		while (index > -1 && board[index][row] == this.currentPlayer) {
+			count = count + 1;
+
+			// move left
+			index = index - 1;
+		}
+
+		index = lastChip['col'] + 1;
+		
+		// check right until indexLength - 1 or no longer same color as current player
+		while (index < this.maxColumns && board[index][row] == this.currentPlayer) {
+			count = count + 1;
+
+			// move right
+			index = index + 1;
+		}
+
+		return count > (noToWin - 1);
 	},
 
 	this.verticalCheck = function(board, lastChip) {
