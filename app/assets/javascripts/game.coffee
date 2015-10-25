@@ -34,10 +34,12 @@ $ ->
 
 	# Drop a token when user clicks column
 	$('.container-slot').click ->
+		# check if game has ended
+		return if gameboard.finished
+		
 		# get column number from id
 		col = parseId($(this).attr('id'))['id']
 		
-		# check if game has ended
 		# process user's turn
 		turnData = gameboard.dropChip(col)
 

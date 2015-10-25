@@ -22,6 +22,9 @@ $(function() {
   });
   return $('.container-slot').click(function() {
     var col, slotId, turnData;
+    if (gameboard.finished) {
+      return;
+    }
     col = parseId($(this).attr('id'))['id'];
     turnData = gameboard.dropChip(col);
     if (turnData['place']['row'] !== -1) {
