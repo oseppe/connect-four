@@ -150,4 +150,14 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 
 		return count > (noToWin - 1);
 	}
+
+	/**
+     * Reset data
+     *
+     * @param none
+     * @return none
+     */
+	this.reset = function() {
+		this.currentPlayer = 0;
+	}
 };

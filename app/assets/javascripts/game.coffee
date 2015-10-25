@@ -55,6 +55,13 @@ $ ->
 
 		return
 
+  # # Reset game
+  # $('#new-game').click (e) ->
+  #   e.preventDefault()
+  #   gameboard.restart
+  #   $(this).removeClass('new-game-emphasis')
+  #   return
+
 # 
 # Change the notification
 # 
@@ -66,38 +73,34 @@ changeNotification = (turnData) ->
 
 	# FIRST check if win
 	if turnData['win']
-        # change notification based on who won
+    # change notification based on who won
 		switch(turnData['player'])
-	    	when 1
-            $('.notification').html('<h3><font class="notification-font-player-one">PLAYER 1 WINS!</font></h3>')
+    	when 1
+        $('.notification').html('<h3><font class="notification-font-player-one">PLAYER 1 WINS!</font></h3>')
 
-	    	when 2
-            $('.notification').html('<h3><font class="notification-font-player-two">PLAYER 2 WINS!</font></h3>')
+    	when 2
+        $('.notification').html('<h3><font class="notification-font-player-two">PLAYER 2 WINS!</font></h3>')
+
+    # $('#new-game').addClass('new-game-emphasis')
+    emphaziseNewGame()
 
 	# THEN check if draw.
 	else if turnData['draw']
-        # change notification to draw
+    # change notification to draw
 		$('.notification').html('<h3><font class="notification-font-draw">ITS A DRAW!</font></h3>')
+  # $('#new-game').addClass('new-game-emphasis')
+  emphaziseNewGame()
 
 	else
-        # change notification based on who's turn is it
+    # change notification based on who's turn is it
 		switch(turnData['player'])
-	    	when 1
-            $('.notification').html('<h3><font class="notification-font-player-two">PLAYER 2</font> turn</h3>')
-	        
-	    	when 2
-            $('.notification').html('<h3><font class="notification-font-player-one">PLAYER 1</font> turn</h3>')
+    	when 1
+        $('.notification').html('<h3><font class="notification-font-player-two">PLAYER 2</font> turn</h3>')
+        
+    	when 2
+        $('.notification').html('<h3><font class="notification-font-player-one">PLAYER 1</font> turn</h3>')
 	        
 		
-	return
-
-# 
-# Construct the notification
-# 
-# @param object hash
-# @return
-createNotification = (turnData) ->
-
 	return
 
 # 
@@ -119,3 +122,12 @@ parseId = (idStr) ->
 	id = parsedIdStr.pop()
 
 	return { id:id, parsedIdStr:parsedIdStr }
+
+# 
+# Construct the notification
+# 
+# @param object hash
+# @return
+emphaziseNewGame = () ->
+  $('#new-game').addClass('new-game-emphasis')
+  return

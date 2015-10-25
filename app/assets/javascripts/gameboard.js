@@ -28,6 +28,7 @@ var Gameboard = function (playerOne, playerTwo, height, width) {
      */
     this.restart = function() {
     	this.board = createTwoDArray(this.rows, this.columns);
+    	this.checker.reset;
     	this.finished = false;
     	this.noTurns = 0;
 		this.turn = 1;

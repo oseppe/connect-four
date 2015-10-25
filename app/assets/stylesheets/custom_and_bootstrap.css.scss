@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$new-game-emphasis-color: #81CFE0;
+
 .center {
   text-align: center;
 }
@@ -29,5 +31,19 @@
 
 .navbar-connect-four {
   background-color: white;
+}
+
+#new-game {
+  color: black;
+  font-size: 1.5em;
+  &:hover {
+    background: $new-game-emphasis-color;
+    color: black;
+    text-decoration: none;
+  } 
+}
+
+.new-game-emphasis {
+  background: $new-game-emphasis-color;
 }
 
