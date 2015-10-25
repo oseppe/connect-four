@@ -1,12 +1,13 @@
-var Gameboard = function (checker, playerOne, playerTwo, height, width) {
+var Gameboard = function (playerOne, playerTwo, height, width) {
 	this.board = createTwoDArray(height, width),
 	this.columns = width,
 	this.rows = height,
-	this.checker = checker,
-	this.playerOne = playerOne,
-	this.playerTwo = playerTwo,
+	this.checker = '',
+	this.finished = false,
 	this.maxTurns = height * width,
 	this.noTurns = 0;
+	this.playerOne = playerOne,
+	this.playerTwo = playerTwo,
 	this.turn = 1,
 	
 	/**
@@ -16,8 +17,7 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
      * @return boolean
      */
 	this.check = function(otherData) {
-		// return this.checker.check(this.board, otherData);
-		return false;
+		return this.checker.check(this.board, otherData);
 	},
 
 	/**
@@ -40,8 +40,9 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 	this.dropChip = function(col) {
 		
 		var chipColor = '';
+		var currentPlayer = 0;
 		var draw = false;
-		var place = {col: col, row: 0};
+		var place = { col: col, row: 0 };
 		var row = this.updateBoard(col, this.turn);
 		var win = false;
 
@@ -50,9 +51,13 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 		// don't change game data if column already filled
 		if (row != -1) {
 
+			// store current Player
+			currentPlayer = this.turn;
+
 			// increment number of turns
 			this.noTurns = this.noTurns + 1;
 
+			// ready game data for next turn
 			switch(this.turn) {
 				case 1:
 					chipColor = this.playerOne;
@@ -64,13 +69,24 @@ var Gameboard = function (checker, playerOne, playerTwo, height, width) {
 					break;
 			}
 
+
 			win = this.check(place);
 			
 			draw = this.maxTurns == this.noTurns;
+
+			// End game if someone won or is a draw
+			if (win || draw) {
+				this.finished = true;
+			};
 		};
 			
-		return { place: place, chipColor: chipColor, win: win, draw: draw };
-	}
+		return { place: place, chipColor: chipColor, win: win, draw: draw, player: currentPlayer };
+	},
+
+	this.setChecker = function(checker) {
+		this.checker = checker;
+	},
+
 	// Start game
 	this.startGame = function() {
 

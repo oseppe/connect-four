@@ -3,10 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-	checker = 'aa'
 	playerOneColor = 'slot-player-one'
 	playerTwoColor = 'slot-player-two'
-	gameboard = new Gameboard(checker, playerOneColor, playerTwoColor, 6, 7)
+	gameboard = new Gameboard(playerOneColor, playerTwoColor, 6, 7)
+
+	checker = new LastChipMethod(gameboard.rows, gameboard.columns, 4);
+	gameboard.setChecker(checker);
 
 	# When user hovers over column, change background colour
 	$('.container-slot').mouseover ->
@@ -34,6 +36,8 @@ $ ->
 	$('.container-slot').click ->
 		# get column number from id
 		col = parseId($(this).attr('id'))['id']
+		
+		# check if game has ended
 		# process user's turn
 		turnData = gameboard.dropChip(col)
 
@@ -48,7 +52,11 @@ $ ->
 			# NOTE: checking order is important.
 			# ALWAYS FIRST check if there is a win THEN check if there is a draw 
 
-			# TODO: FIRST check if win
+			# FIRST check if win
+			if turnData['win']
+				# TODO: proper alert
+				console.log "Player " + turnData['player'] + " wins!"
+			
 			# THEN check if draw.
 			if turnData['draw']
 				# TODO: proper alert

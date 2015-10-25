@@ -3,10 +3,11 @@ var getSlotId, parseId;
 
 $(function() {
   var checker, gameboard, playerOneColor, playerTwoColor;
-  checker = 'aa';
   playerOneColor = 'slot-player-one';
   playerTwoColor = 'slot-player-two';
-  gameboard = new Gameboard(checker, playerOneColor, playerTwoColor, 6, 7);
+  gameboard = new Gameboard(playerOneColor, playerTwoColor, 6, 7);
+  checker = new LastChipMethod(gameboard.rows, gameboard.columns, 4);
+  gameboard.setChecker(checker);
   $('.container-slot').mouseover(function() {
     var col, colSelector;
     col = parseId($(this).attr('id'))['id'];
@@ -27,6 +28,9 @@ $(function() {
       slotId = getSlotId(turnData['place']);
       $(slotId).removeClass('slot-empty');
       $(slotId).addClass(turnData["chipColor"]);
+      if (turnData['win']) {
+        console.log("Player " + turnData['player'] + " wins!");
+      }
       if (turnData['draw']) {
         console.log("DRAW");
       }
