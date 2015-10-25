@@ -51,20 +51,54 @@ $ ->
 			$(slotId).removeClass('slot-empty')
 			$(slotId).addClass(turnData["chipColor"])
 			
-			# NOTE: checking order is important.
-			# ALWAYS FIRST check if there is a win THEN check if there is a draw 
+			changeNotification(turnData)
 
-			# FIRST check if win
-			if turnData['win']
-				# TODO: proper alert
-				console.log "Player " + turnData['player'] + " wins!"
-			
-			# THEN check if draw.
-			if turnData['draw']
-				# TODO: proper alert
-				console.log "DRAW"
-			 	
 		return
+
+# 
+# Change the notification
+# 
+# @param object hash
+# @return
+changeNotification = (turnData) ->
+	# NOTE: checking order is important.
+	# ALWAYS FIRST check if there is a win THEN check if there is a draw 
+
+	# FIRST check if win
+	if turnData['win']
+        # change notification based on who won
+		switch(turnData['player'])
+	    	when 1
+            $('.notification').html('<h3><font class="notification-font-player-one">PLAYER 1 WINS!</font></h3>')
+
+	    	when 2
+            $('.notification').html('<h3><font class="notification-font-player-two">PLAYER 2 WINS!</font></h3>')
+
+	# THEN check if draw.
+	else if turnData['draw']
+        # change notification to draw
+		$('.notification').html('<h3><font class="notification-font-draw">ITS A DRAW!</font></h3>')
+
+	else
+        # change notification based on who's turn is it
+		switch(turnData['player'])
+	    	when 1
+            $('.notification').html('<h3><font class="notification-font-player-two">PLAYER 2</font> turn</h3>')
+	        
+	    	when 2
+            $('.notification').html('<h3><font class="notification-font-player-one">PLAYER 1</font> turn</h3>')
+	        
+		
+	return
+
+# 
+# Construct the notification
+# 
+# @param object hash
+# @return
+createNotification = (turnData) ->
+
+	return
 
 # 
 # Use slot coordinate to construct slot id

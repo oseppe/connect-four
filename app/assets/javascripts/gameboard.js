@@ -27,7 +27,8 @@ var Gameboard = function (playerOne, playerTwo, height, width) {
      * @return none
      */
     this.restart = function() {
-    	this.board = createTwoDArray(rows, columns);
+    	this.board = createTwoDArray(this.rows, this.columns);
+    	this.finished = false;
     	this.noTurns = 0;
 		this.turn = 1;
     }
@@ -85,11 +86,6 @@ var Gameboard = function (playerOne, playerTwo, height, width) {
 
 	this.setChecker = function(checker) {
 		this.checker = checker;
-	},
-
-	// Start game
-	this.startGame = function() {
-
 	},
 
 	/**
