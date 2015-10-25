@@ -1,6 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.center {
+  text-align: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
 #logo {
   color: black;
   float: left;
@@ -19,10 +31,3 @@
   background-color: white;
 }
 
-.hidden {
-  display: none;
-}
-
-.clickable {
-  cursor: pointer;
-}

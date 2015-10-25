@@ -1,3 +1,48 @@
 // Place all the styles related to the Game controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$game-board-color: #446CB3;
+$empty: #E4F1FE;
+$player-one-color: #F9BF3B;
+$player-two-color: #F64747;
+
+.container-slot {
+	border-top: none !important;
+	text-align: center;
+}
+
+#game-board {
+	background: $game-board-color;
+	border-radius: 15px;
+}
+
+.slot {
+	border: 1px solid;
+	border-radius: 50%;
+	margin: auto;
+
+	height: 40px;
+	width: 40px;
+}
+
+.slot-empty {
+	@extend .slot;
+	background: $empty;
+}
+
+.slot-first-player {
+	@extend .slot;
+	border-color: $player-one-color;
+	background: $player-one-color;
+}
+
+.slot-second-player {
+	@extend .slot;
+	border-color: $player-two-color;
+	background: $player-two-color;
+}
+
+
+
+
