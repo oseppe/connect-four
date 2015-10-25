@@ -30,7 +30,6 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 		var colIndex = lastChip['col'] - 1;
 		var rowIndex = lastChip['row'] + 1;
 		
-
 		// check diagonal left down
 		while(colIndex > -1 && rowIndex < this.maxRows && board[colIndex][rowIndex] == this.currentPlayer) {
 			count = count + 1;
@@ -55,10 +54,24 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 	},
 
 	this.diagonalFallingCheck = function(board, lastChip) {
-		var bingo = false;
-		// TODO: check downward until see 0 or opposing color or index length - 1
-		// TODO: check upward until see 0 or opposing color or index 0
-		return bingo;
+		var count = 1;
+		var colIndex = lastChip['col'] - 1;
+		var rowIndex = lastChip['row'] - 1;
+
+		console.log("typeCol:" + typeof(colIndex) + " col:" + colIndex);
+		console.log("typeRow:" + typeof(rowIndex) + " row:" + rowIndex);
+		// check diagonal left up
+		while(colIndex > -1 && rowIndex > -1 && board[colIndex][rowIndex] == this.currentPlayer) {
+			count = count + 1;
+			// move diagonal left up
+			colIndex = colIndex - 1;
+			rowIndex = rowIndex - 1;	
+		}
+		console.log("P" + this.currentPlayer + " count: " + count);
+		// colIndex = lastChip['col'] + 1;
+		// rowIndex = lastChip['row'] + 1;
+		// TODO: check diagonal right down
+		return count > (noToWin - 1);
 	},
 
 	this.horizontalCheck = function(board, lastChip) {
