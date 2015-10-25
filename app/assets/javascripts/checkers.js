@@ -25,6 +25,14 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 		return win;
 	},
 
+	/**
+     * Check LTR Rising Diagonal and RTL Falling Diagonal for a win scenario 
+     * with the chip used this turn as reference 
+     *
+     * @param array
+     * @param object hash
+     * @return boolean
+     */
 	this.diagonalRisingCheck = function(board, lastChip) {
 		var count = 1;
 		var colIndex = lastChip['col'] - 1;
@@ -53,27 +61,46 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 		return count > (noToWin - 1);
 	},
 
+	/**
+     * Check LTR Falling Diagonal and RTL Rising Diagonal for a win scenario 
+     * with the chip used this turn as reference 
+     *
+     * @param array
+     * @param object hash
+     * @return boolean
+     */
 	this.diagonalFallingCheck = function(board, lastChip) {
 		var count = 1;
 		var colIndex = lastChip['col'] - 1;
 		var rowIndex = lastChip['row'] - 1;
 
-		console.log("typeCol:" + typeof(colIndex) + " col:" + colIndex);
-		console.log("typeRow:" + typeof(rowIndex) + " row:" + rowIndex);
 		// check diagonal left up
 		while(colIndex > -1 && rowIndex > -1 && board[colIndex][rowIndex] == this.currentPlayer) {
 			count = count + 1;
 			// move diagonal left up
 			colIndex = colIndex - 1;
-			rowIndex = rowIndex - 1;	
+			rowIndex = rowIndex - 1;
 		}
-		console.log("P" + this.currentPlayer + " count: " + count);
-		// colIndex = lastChip['col'] + 1;
-		// rowIndex = lastChip['row'] + 1;
-		// TODO: check diagonal right down
+		
+		colIndex = lastChip['col'] + 1;
+		rowIndex = lastChip['row'] + 1;
+		// check diagonal right down
+		while(colIndex < this.maxColumns && rowIndex < this.maxRows && board[colIndex][rowIndex] == this.currentPlayer) {
+			count = count + 1;
+			// move diagonal right down
+			colIndex = colIndex + 1;
+			rowIndex = rowIndex + 1;
+		}
 		return count > (noToWin - 1);
 	},
 
+	/**
+     * Check LTR and RTL for a win scenario with the chip used this turn as reference 
+     *
+     * @param array
+     * @param object hash
+     * @return boolean
+     */
 	this.horizontalCheck = function(board, lastChip) {
 		var count = 1;
 		var row = lastChip['row'];
@@ -100,6 +127,14 @@ var LastChipMethod = function (maxRows, maxColumns, noToWin) {
 		return count > (noToWin - 1);
 	},
 
+
+	/**
+     * Check vertically for a win scenario
+     *
+     * @param array
+     * @param object hash
+     * @return boolean
+     */
 	this.verticalCheck = function(board, lastChip) {
 		var count = 1;
 		var column = board[lastChip['col']];
